@@ -22,6 +22,7 @@ def enter_data():
         for i, row in enumerate(data):
             writer.writerow([f'Day {i+1}'] + row)
     print('data is entered')
+# function 2 for data visibility
 def view_data():
     global traffic_density
     if traffic_density is None:
@@ -30,6 +31,7 @@ def view_data():
     print("traffic data day wise(24 hrs)")
     print(traffic_density)
     print()
+# function 3 for analyzing the data
 def analyze_data():
     if traffic_density is None:
         print("data not avilable")
@@ -42,6 +44,7 @@ def analyze_data():
     for i,hour in enumerate(avg_traffic_hour):
         print(f'hour {i+1}: {hour}')
     print()
+# function 4 for calculatinf peak hours
 def peak_hour():
     if traffic_density is None:
         print("no data available")
@@ -51,8 +54,11 @@ def peak_hour():
     min_peak=np.argmin(avg_traffic_hour)
     print(f'max peak hour:{max_peak+1}({avg_traffic_hour[max_peak]})')
     print(f'min peak hour:{min_peak+1}({avg_traffic_hour[min_peak]})')
-# function 5
+# function 5 for ranking based on the traffic
 def rank_day():
+    if traffic_density is None:
+        print("data not available")
+        return
     total_traffic_day=traffic_density.sum(axis=1)
     rank_indices=np.argsort(-total_traffic_day)
     for i,r in enumerate(rank_indices):
